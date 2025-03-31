@@ -1,7 +1,7 @@
 #Classe pour afficher dans la console
 from colorama import Fore, Style
 
-class vue :
+class vue_console :
     def __init__(self):
         pass
 
@@ -41,8 +41,8 @@ class vue :
         choix.append(int(input("Combien souhaitez vous de WallDoor : ")))
         return choix
     #Affiche le plateau dans la console
-    def afficher_plateau(self,plateau,cpt,truc,machin,chouette,bidule,chose,nianiania):
-        self.tour=cpt
+    def afficher_plateau(self,plateau):
+        # print(plateau)
         for i in range(len(plateau)):
             affichage = ""
             for j in range(len(plateau[i])):
@@ -54,8 +54,6 @@ class vue :
                     affichage = affichage + f"{Fore.GREEN}X{Style.RESET_ALL}"
                 elif str(plateau[i][j]) == "3":
                     affichage = affichage + f"{Fore.YELLOW}X{Style.RESET_ALL}"
-                elif str(plateau[i][j]) == "4":
-                    affichage = affichage + f"{Fore.MAGENTA}X{Style.RESET_ALL}"
                 elif str(plateau[i][j]) == " ":
                     affichage = affichage + f"{Fore.BLACK}+{Style.RESET_ALL}"
                 elif str(plateau[i][j]) == "i":
@@ -73,13 +71,13 @@ class vue :
         print(joueur + " a gagné !!")
         print("Fin de partie")
 
-    def get_user_input(self, cpt):
+    def get_user_input(self, nb, cpt):
         while True:
             if cpt>=5:
                 print("Vous pouvez utiliser votre pouvoir")
             else:
                 print("Il vous reste",5-cpt,"tours avant de pouvoir utiliser votre pouvoir")
-            user_input = input(f"Joueur {self.tour}, entrez 'up', 'down', 'left', 'right' pour déplacer votre pion, \n un centre (x,y) suivit de sa direction (n,s,e,w) pour placer un mur ou 'pouvoir' pour utiliser le pouvoir de votre pion: ")
+            user_input = input(f"Joueur {nb}, entrez 'up', 'down', 'left', 'right' pour déplacer votre pion, \n un centre (x,y) suivit de sa direction (n,s,e,w) pour placer un mur ou 'pouvoir' pour utiliser le pouvoir de votre pion: ")
             if user_input in ['up', 'down', 'left', 'right','pouvoir'] or (user_input.endswith("n") or user_input.endswith("s") or user_input.endswith("e") or user_input.endswith("w")) and len(user_input) <=6:
                 return user_input
             else:
@@ -88,11 +86,10 @@ class vue :
     def select_mur(self,murs):
 
         print("Quels mur voulez-vous jouer")
-        print(" - WallCLassique. Mur classique. Vous en avez encore ",murs.count(0),". Entrez 0")
-        print(" - WallSolide. Mur incassable. Vous en avez encore ",murs.count(1),". Entrez 1")
-        print(" - WallLong. Mur de longueur 4. Vous en avez encore ",murs.count(2),". Entrez 2")
-        print(" - WallReusable. Mur réutilisable (pick and redeploy). Vous en avez encore ",murs.count(3),". Entrez 3")
-        print(" - WallDoor. Mur // porte. Vous en avez encore ",murs.count(4),". Entrez 4")
+        print(" - WallSolide. Mur incassable. Vous en avez encore ",murs.count(0),". Entrez 0")
+        print(" - WallLong. Mur de longueur 4. Vous en avez encore ",murs.count(1),". Entrez 1")
+        print(" - WallReusable. Mur réutilisable (pick and redeploy). Vous en avez encore ",murs.count(2),". Entrez 2")
+        print(" - WallDoor. Mur // porte. Vous en avez encore ",murs.count(3),". Entrez 3")
         user_input=input("Votre choix : ")
         return(user_input)
 
